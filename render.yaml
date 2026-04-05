@@ -1,0 +1,23 @@
+# Render deployment configuration
+services:
+  - type: web
+    name: finance-dashboard-backend
+    env: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_URL
+        fromDatabase:
+          name: finance-db
+          property: connectionString
+      - key: PORT
+        value: 10000
+
+databases:
+  - name: finance-db
+    databaseName: finance_dashboard
+    plan: free
