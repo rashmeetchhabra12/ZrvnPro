@@ -5,6 +5,16 @@ const { pool } = require('./config/database');
 const PORT = process.env.PORT || 3000;
 const NODE_ENV = process.env.NODE_ENV || 'development';
 
+// Debug environment variables
+console.log('🔍 Environment Check:');
+console.log(`NODE_ENV: ${NODE_ENV}`);
+console.log(`PORT: ${PORT}`);
+console.log(`DB_HOST: ${process.env.DB_HOST ? 'SET' : 'MISSING'}`);
+console.log(`DB_NAME: ${process.env.DB_NAME ? 'SET' : 'MISSING'}`);
+console.log(`DB_USER: ${process.env.DB_USER ? 'SET' : 'MISSING'}`);
+console.log(`DB_PASSWORD: ${process.env.DB_PASSWORD ? 'SET' : 'MISSING'}`);
+console.log('');
+
 // Test database connection before starting server
 const startServer = async () => {
   try {
@@ -13,7 +23,7 @@ const startServer = async () => {
     console.log('✓ Database connection established');
 
     // Start server
-    app.listen(PORT, () => {
+    app.listen(PORT, '0.0.0.0', () => {
       console.log('='.repeat(50));
       console.log('Finance Backend API Server');
       console.log('='.repeat(50));
